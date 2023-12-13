@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Login = void 0;
 const axios_1 = __importDefault(require("axios"));
-const userPwd = 'demoQA.2023!';
 let baseURL = 'https://demoqa.com';
 // const { BASE_URL } = process.env
 const BASE_URL = baseURL;
@@ -22,7 +21,7 @@ class Login {
     constructor() {
         this.baseURL = BASE_URL;
     }
-    loginToSite(userName) {
+    loginToSite(userName, userPwd) {
         return __awaiter(this, void 0, void 0, function* () {
             const separator = ';';
             let url = `${baseURL}/Account/v1/generatetoken`;
@@ -36,9 +35,10 @@ class Login {
                 data,
                 url
             };
+            console.log(options);
             let resp = yield (0, axios_1.default)(options);
             console.log(url);
-            return resp.data.token;
+            return resp.data;
         });
     }
 }

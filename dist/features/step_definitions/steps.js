@@ -13,22 +13,27 @@ const chai_1 = require("chai");
 const cucumber_1 = require("@cucumber/cucumber");
 const loginApi_1 = require("../../src/requests/apis/loginApi");
 let login = new loginApi_1.Login();
-let token = "";
-(0, cucumber_1.Given)('que accedo con las credenciales del usuario {string} y con las credenciales correctas', function (userName) {
+let data;
+const user = 'demoQA.2023!';
+const userPwd = 'demoQA.2023!';
+const invalidPwd = 'invalid';
+(0, cucumber_1.Given)('que accedo a la pantalla de login con usuario {string} y credenciales correctas', function (userName) {
     return __awaiter(this, void 0, void 0, function* () {
-        token = yield login.loginToSite(userName);
-        (0, chai_1.expect)(token).is.not.empty;
+        data = yield login.loginToSite(userName, userPwd);
+        (0, chai_1.expect)(data.token).is.not.empty;
     });
 });
-(0, cucumber_1.When)('ingreso el usuario {string} y el password {string} y confirmo', function (string, string2) {
+(0, cucumber_1.When)('ingreso el usuario {string} y el password {string}', function (userName, invalidPwd) {
     return __awaiter(this, void 0, void 0, function* () {
-        // Write code here that turns the phrase above into concrete actions
-        return 'pending';
+        data = yield login.loginToSite(userName, invalidPwd);
+        (0, chai_1.expect)(data).is.not.empty;
+        (0, chai_1.expect)(data.status).to.be('User authorization failed.');
     });
 });
-(0, cucumber_1.Then)('se debe mostrar un mensaje de error que dice {string}', function (string) {
+(0, cucumber_1.Then)('se debe mostrar un mensaje de error que dice {string}', function (msj) {
     return __awaiter(this, void 0, void 0, function* () {
-        // Write code here that turns the phrase above into concrete actions
-        return 'pending';
+        data = yield login.loginToSite(user, invalidPwd);
+        (0, chai_1.expect)(data).is.not.empty;
+        (0, chai_1.expect)(data.status).to.be(msj);
     });
 });

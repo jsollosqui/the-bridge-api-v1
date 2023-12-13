@@ -5,7 +5,7 @@
   "main": "index.js",
   "author": "Tau Sofware Company",
   "scripts": {
-    "startLocal": "tsc && cucumber-js features/**/*.feature --require dist/**/step_definitions/**/*.js -f html:./results/cucumber.html --publish"
+    "testApi": "rmdir /s /q dist && tsc && cucumber-js features/**/*.feature --require dist/**/step_definitions/**/*.js -f html:./results/cucumber.html --publish"
   },
 
   "dependencies": {

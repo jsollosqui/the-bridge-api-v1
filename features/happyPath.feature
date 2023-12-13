@@ -1,9 +1,9 @@
 # language: es
-Característica: Esto es una demo de logueo a la pantalla principal, acá podemos escribir toda la historia
+Característica: Esto es un ejemplo de logueo e interaccion basica con la interfaz demoQA
 
   @casoSimple
-  Escenario: Ingreso usuario incorrecto
-    Dado que accedo con las credenciales del usuario 'demoQA.2023!' y con las credenciales correctas
-    Cuando ingreso el usuario 'Pedro' y el password 'incorrecto' y confirmo
-    Entonces se debe mostrar un mensaje de error que dice 'Invalid username or password!'
+  Escenario: Ingreso con usuario correcto
+    Dado que accedo a la pantalla de login con usuario 'demoQA.2023!' y credenciales correctas
+    Cuando ingreso el usuario 'Pedro' y el password 'incorrecto'
+    Entonces se debe mostrar un mensaje de error que dice 'User authorization failed.'
   

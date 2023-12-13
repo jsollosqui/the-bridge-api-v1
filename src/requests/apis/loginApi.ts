@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { any } from 'prop-types';
 
-const userPwd = 'demoQA.2023!';
 let baseURL = 'https://demoqa.com';
 
 // const { BASE_URL } = process.env
@@ -14,7 +13,7 @@ export class Login{
         this.baseURL = BASE_URL;
     }
 
-    async loginToSite(userName: any) {
+    async loginToSite(userName: any, userPwd: any) {
         const separator = ';';
         let url = `${baseURL}/Account/v1/generatetoken`;
         const data = { 
@@ -27,11 +26,11 @@ export class Login{
         data,
         url
         };
-
+    console.log(options);
         let resp = await axios(options);
         console.log(url)
 
-        return resp.data.token
+        return resp.data
     }
 }
 
