@@ -13,7 +13,6 @@ Given('que accedo a la pantalla de login con usuario {string} y credenciales cor
   expect(data.token).is.not.empty;
 });
 
-
 When('ingreso el usuario {string} y el password {string}', async function (userName, invalidPwd) {
   data = await login.loginToSite(userName, invalidPwd);
   expect(data).is.not.empty;
