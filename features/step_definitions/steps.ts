@@ -6,13 +6,8 @@ import { Books } from '../../src/requests/apis/booksApi'
 let login = new Login();
 let book = new Books();
 let data: any;
-const user = 'demoQA.2023!';
-const userPwd = 'demoQA.2023!';
-const invalidPwd = 'invalid';
 
-
-
-Given('que accedo a la pantalla de login con usuario {string} y credenciales correctas', async function (userName) {
+Given('que accedo a la pantalla de login con usuario {string} y contraseña {string}', async function (userName, userPwd) {
   data = await login.loginToSite(userName, userPwd);
   expect(data.token).is.not.empty;
 });
@@ -20,13 +15,10 @@ Given('que accedo a la pantalla de login con usuario {string} y credenciales cor
 When('ingreso el usuario {string} y el password {string}', async function (userName, invalidPwd) {
   data = await login.loginToSite(userName, invalidPwd);
   expect(data).is.not.empty;
-  expect(data.result).to.be.equals('User authorization failed.');
 });
 
 Then('se debe mostrar un mensaje de error que dice {string}', async function (msj) {
-  data = await login.loginToSite(user, invalidPwd);
-  expect(data).is.not.empty;
-  expect(data.result).to.be.equals('User authorization failed.');
+  expect(data.result).to.be.equals(msj);
 });
 
 Given('que quiero realizar la busqueda de los libros del autor {string}', async function (aut) {
