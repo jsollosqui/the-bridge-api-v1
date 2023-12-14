@@ -6,30 +6,26 @@ let baseURL = 'https://demoqa.com';
 // const { BASE_URL } = process.env
 const BASE_URL = baseURL
 
-export class Login{
+export class Books{
     baseURL: string;
 
     constructor() {
         this.baseURL = BASE_URL;
     }
 
-    async loginToSite(userName: any, userPwd: any) {
+    async listBooks(aut: any) {
         const separator = ';';
-        let url = `${baseURL}/Account/v1/generatetoken`;
-        const data = { 
-            'userName': userName,
-            'password': userPwd
-        };
+        let url = `${baseURL}/BookStore/v1/Books`;
         let options = {
-        method: 'POST',
+        method: 'GET',
         headers: { 'content-type': 'application/json' },
-        data,
         url
         };
         
         let resp = await axios(options);
+        
 
-        return resp.data
+        return resp.data.books
     }
 }
 

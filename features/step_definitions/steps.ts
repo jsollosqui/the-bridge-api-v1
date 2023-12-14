@@ -1,12 +1,16 @@
 import { expect } from 'chai';
 import { Given, When, Then, DataTable } from '@cucumber/cucumber';
 import { Login } from '../../src/requests/apis/loginApi'
+import { Books } from '../../src/requests/apis/booksApi'
 
 let login = new Login();
+let book = new Books();
 let data: any;
 const user = 'demoQA.2023!';
 const userPwd = 'demoQA.2023!';
 const invalidPwd = 'invalid';
+
+
 
 Given('que accedo a la pantalla de login con usuario {string} y credenciales correctas', async function (userName) {
   data = await login.loginToSite(userName, userPwd);
@@ -16,11 +20,26 @@ Given('que accedo a la pantalla de login con usuario {string} y credenciales cor
 When('ingreso el usuario {string} y el password {string}', async function (userName, invalidPwd) {
   data = await login.loginToSite(userName, invalidPwd);
   expect(data).is.not.empty;
-  expect(data.status).to.be('User authorization failed.');
+  expect(data.result).to.be.equals('User authorization failed.');
 });
 
 Then('se debe mostrar un mensaje de error que dice {string}', async function (msj) {
   data = await login.loginToSite(user, invalidPwd);
   expect(data).is.not.empty;
-  expect(data.status).to.be(msj);
+  expect(data.result).to.be.equals('User authorization failed.');
+});
+
+Given('que quiero realizar la busqueda de los libros del autor {string}', async function (aut) {
+  data = await book.listBooks(aut);
+  expect(data).is.not.empty;
+});
+
+Then('la busqueda debe contener el libro {string}', async function (libro) {
+    data.forEach((elemento:any) => {
+    if (elemento.title == libro ){
+      const aut ='Addy Osmani';
+      expect(elemento.author).to.equal(aut);
+    }
+});
+  expect(data).is.not.empty;
 });
