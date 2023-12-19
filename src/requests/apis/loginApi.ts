@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { any } from 'prop-types';
 
 let baseURL = 'https://demoqa.com';
 
@@ -26,7 +25,7 @@ export class Login{
         data,
         url
         };
-        
+
         let resp = await axios(options);
 
         return resp.data

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { any } from 'prop-types';
 
 let baseURL = 'https://demoqa.com';
 
@@ -21,7 +20,7 @@ export class Books{
         headers: { 'content-type': 'application/json' },
         url
         };
-        
+
         let resp = await axios(options);
         
 
