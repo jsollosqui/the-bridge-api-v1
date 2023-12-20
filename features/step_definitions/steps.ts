@@ -6,6 +6,7 @@ import { Books } from '../../src/requests/apis/booksApi'
 let login = new Login();
 let book = new Books();
 let data: any;
+var autLibro: any;
 
 Given('que accedo a la pantalla de login con usuario {string} y contraseña {string}', async function (userName, userPwd) {
   data = await login.loginToSite(userName, userPwd);
@@ -22,6 +23,7 @@ Then('se debe mostrar un mensaje de error que dice {string}', async function (ms
 });
 
 Given('que quiero realizar la busqueda de los libros del autor {string}', async function (aut) {
+  autLibro = aut
   data = await book.listBooks(aut);
   expect(data).is.not.empty;
 });
@@ -29,8 +31,7 @@ Given('que quiero realizar la busqueda de los libros del autor {string}', async 
 Then('la busqueda debe contener el libro {string}', async function (libro) {
     data.forEach((elemento:any) => {
     if (elemento.title == libro ){
-      const aut ='Addy Osmani';
-      expect(elemento.author).to.equal(aut);
+      expect(elemento.author).to.equal(autLibro);
     }
   });
   expect(data).is.not.empty;
